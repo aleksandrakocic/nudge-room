@@ -1,9 +1,0 @@
-#chatbox {
-    height: 200px;
-    max-width: 400px;
-    overflow-y: scroll;
-}
-
-#sound {
-    visibility: hidden;
-}

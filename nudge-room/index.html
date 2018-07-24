@@ -1,118 +1,15 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>nudge-room</title>
-    <link rel="stylesheet" href="/style/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Nudge-room-socketio</title>
+  
 </head>
 <body>
-  <h1>nudge room</h1>
-    <div id='app'>
-      <div v-if='state == 0'>
-        <h3>pls choose username</h3>
 
-        <!-- 
-        audio should be invisible
-        find if can be played on function
-        when someone send a msg all others should get notification(nudge.mp3)
-        <audio id='sound' controls>
-            <source src="soundnudge.mp3" type="audio/mp3">
-        </audio>
-        It's easy, just get your audio element and call the play() method:
-        document.getElementById('yourAudioTag').play();
-        
-        <audio id="audiotag1" src="audio/flute_c_long_01.wav" preload="auto"></audio>
-           <a href="javascript:play_single_sound();">Play 5-sec sound on single channel</a>
-           <script type="text/javascript">
-	       function play_single_sound() {
-		      document.getElementById('audiotag1').play();
-	        }
-            </script>
-	
-        .................................................
-        var audio = new Audio('audio_file.mp3');
-        audio.play();
-        <audio id="audiotag1" src="nudge.mp3" preload="auto"></audio>
-        -->
-        <form action="" @submit.prevent='setUsername'>
-            <input type="text" placeholder="username" v-model:value='username'/>
-            <input type="submit" value='join'/>
-        </form>
-        <button @click='continueWithoutUsername'>as anonymous</button>
-      </div>
-
-     <div v-if='state == 1'>
-      
-
-      <ul id='chatbox'>
-        <li v-for='message in messages'>
-            {{ message.username }} : {{ message.message }}
-        </li>
-      </ul>
-        <!-- add prevent submit -->
-      <form @submit.prevent="sendMessage">
-        <input type="text" placeholder='your message' v-model:value='message'/>
-        <input type="submit" value='send'/>
-      </form>
-     </div> 
-
-    </div>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-<script>
-  var socket = null;
-
-  var app = new Vue ({
-    el:'#app',
-    data: {
-        message: '',
-        messages: [],
-        username: '',
-        state: 0,
-    },
-
-    methods: {
-        sendMessage: function () {
-          socket.emit('message', this.message);
-          this.message = '';
-        //   document.getElementById('audiotag1').play();
-        },
-        setUsername: function () {
-            socket.emit('join', this.username);
-            this.username = '';
-            this.state=1;
-        },
-        continueWithoutUsername: function () {
-            socket.emit('join', null);
-            this.state = 1;
-        },
-        play() {
-            console.log('playing')
-            this.audio.play();
-        } 
-
-    },
-
-    created: function () {
-        socket = io();
-            this.audio = document.getElementById('audio');
-    },
-
-    mounted: function () {
-      socket.on('message', function(message) {
-        app.messages.push(message);
-        // for scroll ~to stay on the last message
-        app.$nextTick(function () {
-            var messageBox = document.getElementById('chatbox')
-             messageBox.scrollTop = messageBox.scrollHeight;
-            })
-        })
-      }
-    })
-</script>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+  
 </body>
 </html>
